@@ -3,6 +3,7 @@ package lambdasinaction._02stream.basic1;
 import java.util.*;
 
 import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 public class StreamBasic {
@@ -17,6 +18,10 @@ public class StreamBasic {
         getLowCaloricDishesNamesInJava8MethodRef(Dish.menu).forEach(System.out::println);
         System.out.println("--- Vegeterian");
         getVegeterianDishesName(Dish.menu).forEach(System.out::println);
+
+        System.out.println("--- GroupingBy");
+        Map<String, List<Dish>> groupingMenu = getGroupingMenu(Dish.menu);
+        System.out.println("groupingMenu = " + groupingMenu);
     }
 
     public static List<String> getLowCaloricDishesNamesInJava7(List<Dish> dishes){
@@ -70,6 +75,7 @@ public class StreamBasic {
         */
         return dishes.stream()  //Stream<Dish>
                 .filter(dish -> dish.getCalories() <= 400) //Stream<Dish>
+                //Comparator의 compare() 두번째 인자인 d2를 먼저 사용하면 내림차순(desc)
                 .sorted((d1,d2) -> Integer.compare(d2.getCalories(), d1.getCalories()))  //Stream<Dish>
                 .map(Dish::getName)  //Stream<String>
                 .collect(toList()); //List<String>
@@ -85,8 +91,11 @@ public class StreamBasic {
 
     //400칼로리 이하인 메뉴를 다이어트로, 아닐 경우 일반으로 그룹핑해라.
     public static Map<String, List<Dish>>  getGroupingMenu(List<Dish> dishes){
-        return null;
-
+        return dishes.stream()  //Stream<Dish>
+                .collect(groupingBy(dish -> {
+                    if (dish.getCalories() <= 400) return "Diet";
+                    else return "Normal";
+                }));
     }
 
 
