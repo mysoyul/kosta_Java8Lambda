@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public class FunctionDemo {
-
+	//Function 인터페이스 R apply(T t)
 	public static List<String> getColorList(List<Apple> inventory, Function<Apple, String> function) {
 		List<String> colorList = new ArrayList<String>();
 		for (Apple apple : inventory) {
@@ -22,15 +22,21 @@ public class FunctionDemo {
 		inventory.add(new Apple(150, "red"));
 
 		// 1. using anonymous inner class
-
-		
+		getColorList(inventory, new Function<Apple, String>() {
+			@Override
+			public String apply(Apple apple) {
+				return apple.getColor();
+			}
+		}).forEach(System.out::println);
 
 		// 2. lambda expression
-		
+		System.out.println("---- lambda expression");
+		getColorList(inventory, apple -> apple.getColor()).forEach(System.out::println);
 
 		// 3. Method Reference
 		// Function<Apple,String> function = Apple :: getColor;
-		
+		System.out.println("---- Method Reference");
+		getColorList(inventory, Apple::getColor).forEach(System.out::println);
 
 	}
 
