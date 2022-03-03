@@ -44,11 +44,33 @@ public class _03Mapping {
         System.out.println(wordLengths);
 
         //2. map - 중복된 문자 제거한 word 리스트
+        List<String> stringList = List.of("Hello", "World");
 
+        stringList.stream() //Stream<String>
+                .map(word -> word.split("")) //Stream<String[]>
+                .distinct()
+                .collect(toList())
+                .forEach(System.out::println);
 
-        //3.flatMap - 중복된 문자 제거가 word 리스트
+        System.out.println("--- flatMap() 시작");
+        //3.map(), flatMap() - 중복된 문자 제거가 word 리스트
+        stringList.stream() //Stream<String>
+                .map(word -> word.split("")) //Stream<String[]>
+                //Arrays.stream() => Stream<T> stream(T[] array)
+                .flatMap(wordArray -> Arrays.stream(wordArray)) //Stream<String>
+                .distinct()
+                .collect(toList())
+                .forEach(System.out::print);
 
+        System.out.println("\n--- flatMap() ");
 
+        stringList.stream() //Stream<String>
+                .flatMap(word -> Arrays.stream(word.split("")))
+                .distinct()
+                .collect(toList())
+                .forEach(System.out::print);
+
+        System.out.println("\n--- flatMap() 끝");
 
 
         // flatMap
