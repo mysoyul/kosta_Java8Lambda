@@ -12,7 +12,7 @@ public class FilteringApples{
                 new Apple(120, "red"));
 
         // 람다식 사용 [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
-
+        filterApples(inventory, apple -> apple.getColor().equals("green")).forEach(System.out::println);
 
         // 람다식 사용[Apple{color='green', weight=155}]
 
@@ -38,8 +38,9 @@ public class FilteringApples{
         return true;
     }
 
-    public static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> p){
-
-        return null;
+    public static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> predicate){
+        List<Apple> appleList = new ArrayList<>();
+        inventory.forEach(apple -> {if (predicate.test(apple)) appleList.add(apple);});
+        return appleList;
     }
 }
