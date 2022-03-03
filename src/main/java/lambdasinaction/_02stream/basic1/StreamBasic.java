@@ -3,6 +3,7 @@ package lambdasinaction._02stream.basic1;
 import java.util.*;
 
 import static java.util.Comparator.comparing;
+import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
@@ -16,12 +17,15 @@ public class StreamBasic {
 
         // Java 8
         getLowCaloricDishesNamesInJava8MethodRef(Dish.menu).forEach(System.out::println);
-        System.out.println("--- Vegeterian");
+        System.out.println("--- Vegetarian");
         getVegeterianDishesName(Dish.menu).forEach(System.out::println);
 
         System.out.println("--- GroupingBy");
         Map<String, List<Dish>> groupingMenu = getGroupingMenu(Dish.menu);
         System.out.println("groupingMenu = " + groupingMenu);
+
+        Dish maxCalorieDish = getMaxCaloryDish(Dish.menu);
+        System.out.println("maxCalorieDish = " + maxCalorieDish);
     }
 
     public static List<String> getLowCaloricDishesNamesInJava7(List<Dish> dishes){
@@ -98,11 +102,10 @@ public class StreamBasic {
                 }));
     }
 
-
     //가장 칼로리가 높은 메뉴를 찾아라
     public static Dish getMaxCaloryDish (List<Dish> dishes) {
-        return null;
-
-
+        return dishes.stream() //Stream<Dish>
+                .max(comparingInt(Dish::getCalories)) //Optional<Dish>
+                .orElse(null); //Dish
     }
 }
