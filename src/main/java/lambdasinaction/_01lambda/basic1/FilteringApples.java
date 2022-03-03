@@ -25,8 +25,13 @@ public class FilteringApples {
 			}
 		});
 
+		//filter method 호출 - 람다식 
+		filter(inventory, apple -> apple.getColor().equals("red"))
+				.forEach(apple -> System.out.println("apple = " + apple));
 
-
+		System.out.println("-------------");
+		filter(inventory, apple -> (apple.getColor().equals("green")) && (apple.getWeight() > 150))
+				.forEach(System.out::println);
 	}
 
 	public static List<Apple> filterGreenApples(List<Apple> inventory) {
