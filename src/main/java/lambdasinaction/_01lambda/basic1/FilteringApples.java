@@ -1,6 +1,7 @@
 package lambdasinaction._01lambda.basic1;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class FilteringApples {
 
@@ -11,7 +12,20 @@ public class FilteringApples {
 						new Apple(155, "green"),
 						new Apple(120, "red"));
 
-		//filter method 호출
+		//filter method 호출 - 익명클래스
+		filter(inventory, new ApplePredicate() {
+			@Override
+			public boolean test(Apple a) {
+				return a.getColor().equals("green");
+			}
+		}).forEach(new Consumer<Apple>() {
+			@Override
+			public void accept(Apple apple) {
+				System.out.println("apple = " + apple);
+			}
+		});
+
+
 
 	}
 
@@ -55,6 +69,7 @@ public class FilteringApples {
 		return result;
 	}
 
+	@FunctionalInterface
 	interface ApplePredicate {
 		public boolean test(Apple a);
 	}
