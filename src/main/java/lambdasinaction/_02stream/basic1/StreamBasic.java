@@ -1,10 +1,6 @@
 package lambdasinaction._02stream.basic1;
 
 import java.util.*;
-import java.util.stream.Collectors;
-
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toList;
 
 public class StreamBasic {
 
@@ -15,7 +11,7 @@ public class StreamBasic {
         System.out.println("---");
 
         // Java 8
-
+        getLowCaloricDishesNamesInJava8(Dish.menu).forEach(System.out::println);
 
     }
 
@@ -42,9 +38,15 @@ public class StreamBasic {
     }
 
     //Java 8
+    //칼로리가 400 이하인 요리를 추출 칼로리 순으로 정렬하고 상위 3개의 Dish 이름을 반환하기
     public static List<String> getLowCaloricDishesNamesInJava8(List<Dish> dishes){
-        return null;
-
+        return dishes.stream()  //Stream<Dish>
+                .filter(dish -> dish.getCalories() <= 400) //Stream<Dish>
+                //comparing()의 아규먼트 Function<? super T,? extends U>
+                .sorted(Comparator.comparing(dish -> dish.getCalories()))  //Stream<Dish>
+                //map() 의 아규먼트 Function<? super T,? extends R>
+                .map(dish -> dish.getName())  //Stream<String>
+                .collect(); //List<String>
 
     }
 
