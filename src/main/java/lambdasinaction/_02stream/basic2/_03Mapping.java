@@ -24,6 +24,17 @@ public class _03Mapping {
                 .sum();
         System.out.println("sum = " + sum);
 
+        //2.1 Stream의 reduce() 사용한 칼로리 합계
+        sum = menu.stream()
+                .map(Dish::getCalories)
+                .reduce((prev,curr) -> prev + curr)
+                .orElse(0);
+        System.out.println("sum = " + sum);
+
+        sum = menu.stream()
+                .map(Dish::getCalories)
+                .reduce(0, (prev,curr) -> prev + curr);
+        System.out.println("sum = " + sum);
 
         // map
         List<String> words = Arrays.asList("Hello", "World");
