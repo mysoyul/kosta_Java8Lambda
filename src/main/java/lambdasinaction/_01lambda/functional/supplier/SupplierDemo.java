@@ -16,6 +16,7 @@ class Car extends Vehicle {
 }
 
 public class SupplierDemo {
+	//Supplier T get()
 	static void driveVehicle(Supplier<? extends Vehicle> supplier) {
 		Vehicle vehicle = supplier.get();
 		vehicle.drive();
@@ -23,8 +24,11 @@ public class SupplierDemo {
 
 	public static void main(String[] args) {
 		// Using Lambda expression
-		
-		
+		driveVehicle(() -> new Vehicle());
+		driveVehicle(() -> new Car());
+
 		// Using Method Reference
+		driveVehicle(Vehicle::new);
+		driveVehicle(Car::new);
 	}
 }
