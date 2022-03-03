@@ -1,6 +1,7 @@
 package lambdasinaction._02stream.basic1;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class StreamBasic {
 
@@ -46,8 +47,8 @@ public class StreamBasic {
                 .sorted(Comparator.comparing(dish -> dish.getCalories()))  //Stream<Dish>
                 //map() 의 아규먼트 Function<? super T,? extends R>
                 .map(dish -> dish.getName())  //Stream<String>
-                .collect(); //List<String>
-
+                .collect(Collectors.toList())
+                .subList(0,3); //List<String>
     }
 
     //400칼로리 이하인 메뉴를 다이어트로, 아닐 경우 일반으로 그룹핑해라.
