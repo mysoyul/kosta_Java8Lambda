@@ -56,6 +56,7 @@ public class StreamBasic {
 
     //정렬을 Descending
     public static List<String> getLowCaloricDishesNamesInJava8MethodRef(List<Dish> dishes){
+        /*
         return dishes.stream()  //Stream<Dish>
                 .filter(dish -> dish.getCalories() <= 400) //Stream<Dish>
                 .sorted(new Comparator<Dish>() {
@@ -66,8 +67,12 @@ public class StreamBasic {
                 })  //Stream<Dish>
                 .map(Dish::getName)  //Stream<String>
                 .collect(toList()); //List<String>
-
-
+        */
+        return dishes.stream()  //Stream<Dish>
+                .filter(dish -> dish.getCalories() <= 400) //Stream<Dish>
+                .sorted((d1,d2) -> Integer.compare(d2.getCalories(), d1.getCalories()))  //Stream<Dish>
+                .map(Dish::getName)  //Stream<String>
+                .collect(toList()); //List<String>
     }
     //야채(vegeterian) 의 요리를 이름 순으로 정렬하고 Dish 이름을 반환하기
     public static List<String> getVegeterianDishesName(List<Dish> dishes){
