@@ -8,7 +8,7 @@ import static java.time.temporal.TemporalAdjusters.*;
 public class TemporalAdjustersTest {
     public static void main(String[] args) {
         LocalDate now = LocalDate.now();
-        //now = LocalDate.of(2021,11,15);
+        //now = LocalDate.of(2022,3,28);
 
         //usingTemporalAdjuster(now);
         calculateMartOffDay(now);
@@ -19,6 +19,7 @@ public class TemporalAdjustersTest {
         LocalDate martOffDay = date.with(temporal -> {
             //1. 기준이 되는 날짜를 구한다
             LocalDate theDay = LocalDate.from(temporal);
+            System.out.println("기준날짜 = " + theDay);
             //2. 두번째, 네번째 일요일 날짜를 구한다
             LocalDate secondDay = theDay.with(dayOfWeekInMonth(2, DayOfWeek.SUNDAY));
             System.out.println("secondDay = " + secondDay);
