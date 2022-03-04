@@ -47,24 +47,35 @@ public class PuttingIntoPractice{
                 .collect(Collectors.toList())
                 .forEach(System.out::println);
 
-
         // Query 4: Return a string of all traders names sorted alphabetically. String
-
-
+        String names = transactions.stream() //Stream<Transaction>
+                .map(tx -> tx.getTrader().getName()) //Stream<String>
+                .distinct()
+                .sorted()
+                .reduce("", (s1, s2) -> s1 + s2);
+        System.out.println("names = " + names);
 
         // Query 5: Are there any trader based in Milan? boolean
-
-
-
+        boolean milanBased = transactions.stream()
+                .anyMatch(tx -> tx.getTrader().getCity().equals("Milan"));
+        System.out.println("milanBased = " + milanBased);
 
         // Query 6: Update all transactions so that the traders from Milan are set to Cambridge.
+        transactions.forEach(System.out::println);
 
-
-
+        transactions.stream()
+                .map(Transaction::getTrader)
+                .filter(tr -> tr.getCity().equals("Milan"))
+                .forEach(tr -> tr.setCity("Cambridge"));
+        System.out.println("--- After ");
+        transactions.forEach(System.out::println);
 
         // Query 7: What's the highest value in all the transactions?
-
-
+        int highValue = transactions.stream()
+                .mapToInt(Transaction::getValue)
+                .max()
+                .orElse(0);
+        System.out.println("highValue = " + highValue);
 
     }
 }
