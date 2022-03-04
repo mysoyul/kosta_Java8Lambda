@@ -3,6 +3,7 @@ package lambdasinaction._02stream.basic2;
 import lambdasinaction._02stream.basic1.Dish;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class _04Finding {
 
@@ -30,7 +31,8 @@ public class _04Finding {
 
     //3. noneMatch
     private static boolean isHealthyMenu2(){
-        return Dish.menu.stream().noneMatch(dish -> dish.getCalories() > 800);
+        Predicate<Dish> predicate1 = dish -> dish.getCalories() > 800;
+        return Dish.menu.stream().noneMatch(predicate1.or(dish -> dish.getName().contains("g")));
     }
     //4. findAny
     private static Optional<Dish> findVegetarianDish(){
