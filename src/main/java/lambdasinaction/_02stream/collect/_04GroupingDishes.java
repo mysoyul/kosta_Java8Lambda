@@ -36,7 +36,6 @@ public class _04GroupingDishes {
     }
     //3. type별로 그룹핑 후에 다시 칼로리별로 그룹핑
     private static Map<Dish.Type, Map<CaloricLevel, List<Dish>>> groupDishedByTypeAndCaloricLevel() {
-
         return menu.stream()
                 .collect(groupingBy(Dish::getType, groupingBy(dish -> {
                     if (dish.getCalories() <= 400) return CaloricLevel.DIET;
@@ -46,7 +45,8 @@ public class _04GroupingDishes {
     }
     //4. type별 갯수 카운팅
     private static Map<Dish.Type, Long> countDishesInGroups() {
-        return null;
+        return menu.stream()
+                .collect(groupingBy( Dish::getType, counting() ));
     }
     //5. type별 그룹에서 가장 칼로리가 높은 Dish 찾기
     private static Map<Dish.Type, Optional<Dish>> mostCaloricDishesByType() {
