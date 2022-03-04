@@ -13,6 +13,7 @@ public class _06NumericStreams {
         List<Integer> numbers = Arrays.asList(3,4,5,1,2);
 
         Arrays.stream(numbers.toArray()).forEach(System.out::println);
+        
         int calories = menu.stream()
                            .mapToInt(Dish::getCalories)
                            .sum();
@@ -23,7 +24,6 @@ public class _06NumericStreams {
         OptionalInt maxCalories = menu.stream()                                                      
                                       .mapToInt(Dish::getCalories)
                                       .max();
-
         int max;
         if(maxCalories.isPresent()){
             max = maxCalories.getAsInt();
@@ -34,6 +34,11 @@ public class _06NumericStreams {
         }
         System.out.println(max);
 
+        //Optional의 orElseGet의 아규먼트는 Supplier => T get()
+        int maxValue = menu.stream().mapToInt(Dish::getCalories).max().orElseGet(() -> 1);
+        System.out.println("maxValue = " + maxValue);
+        
+        
         // numeric ranges
         IntStream evenNumbers = IntStream.rangeClosed(1, 100)
                                  .filter(n -> n % 2 == 0);
