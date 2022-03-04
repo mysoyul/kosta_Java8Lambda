@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Comparator.comparing;
 import static java.util.Comparator.comparingInt;
 
 public class PuttingIntoPractice{
@@ -38,7 +39,13 @@ public class PuttingIntoPractice{
         cityList.forEach(System.out::println);
 
         // Query 3: Find all traders from Cambridge and sort them by name. List<String>
-
+        transactions.stream() //Stream<Transaction>
+                .map(Transaction::getTrader) //Stream<Trader>
+                .filter(trader -> trader.getCity().equals("Cambridge"))
+                .distinct()
+                .sorted(comparing(Trader::getName))
+                .collect(Collectors.toList())
+                .forEach(System.out::println);
 
 
         // Query 4: Return a string of all traders names sorted alphabetically. String
