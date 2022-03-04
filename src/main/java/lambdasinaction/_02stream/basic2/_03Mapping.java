@@ -86,13 +86,18 @@ public class _03Mapping {
         pairs.forEach(pair -> System.out.println("(" + pair[0] + ", " + pair[1] + ")"));
 
         //----- flatMap 사용하기
-
         List<Customer> customers = List.of(new Customer(101, "john", "john@gmail.com", Arrays.asList("397937955", "21654725")),
                 new Customer(102, "smith", "smith@gmail.com", Arrays.asList("89563865", "2487238947")),
                 new Customer(103, "peter", "peter@gmail.com", Arrays.asList("38946328654", "3286487236")),
                 new Customer(104, "kely", "kely@gmail.com", Arrays.asList("389246829364", "948609467")));
 
+        //Stream<R> map(Function<? super T,? extends R> mapper)
+        List<List<String>> phoneList = customers.stream()  //Stream<Customer>
+                .map(Customer::getPhoneNumbers) //Stream<List<String>>
+                .collect(toList());//List<List<String>>
+        System.out.println("phoneList = " + phoneList);
 
+        //Stream<R> flatMap(Function<? super T,? extends Stream<? extends R>> mapper)
     }
 
     static class Customer {
