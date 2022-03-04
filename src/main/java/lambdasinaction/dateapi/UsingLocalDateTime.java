@@ -2,7 +2,10 @@ package lambdasinaction.dateapi;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 
 public class UsingLocalDateTime {
     public static void main(String[] args) {
@@ -26,6 +29,16 @@ public class UsingLocalDateTime {
         System.out.println("현재기준 1개월 후 " + today.plusMonths(1));
         System.out.println(DayOfWeek.FRIDAY.plus(3));
 
-        //
+        //LocalDateTime 사용
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("now = " + now);
+
+        System.out.println("시분초나노초 " + now.getHour() + now.getMinute() + now.getSecond() + now.getNano());
+        System.out.println(now.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+
+        //Formatter 생성해서 포맷하기
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss E a", Locale.CHINA);
+        System.out.println(now.format(myFormatter));
+
     }
 }
