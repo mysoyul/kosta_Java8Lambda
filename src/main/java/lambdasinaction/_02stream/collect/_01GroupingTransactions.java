@@ -1,6 +1,7 @@
 package lambdasinaction._02stream.collect;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.summingDouble;
@@ -30,7 +31,9 @@ public class _01GroupingTransactions {
         System.out.println("currencyDoubleMap = " + currencyDoubleMap);
 
         //각 트랜잭션을 통화별로 그룹화 한 뒤 각 트랜잭션이 5000 이상일 경우를 구분하여 리스트로 반환하시오.
-
+        Map<Currency, Map<Boolean, List<Transaction>>> map = transactions.stream()
+                .collect(groupingBy(Transaction::getCurrency, Collectors.partitioningBy(tx -> tx.getValue() >= 5000)));
+        System.out.println("map = " + map);
     }
 
     private static void groupImperatively() {
