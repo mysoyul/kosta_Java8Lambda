@@ -2,6 +2,9 @@ package lambdasinaction._02stream.basic2;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparingInt;
 
 public class PuttingIntoPractice{
     public static void main(String ...args){
@@ -21,14 +24,18 @@ public class PuttingIntoPractice{
 
 
         // Query 1: Find all transactions from year 2011 and sort them by value (small to high).
-
-
-
+        transactions.stream() //Stream<Transaction>
+                .filter(tx -> tx.getYear() == 2011)
+                .sorted(comparingInt(Transaction::getValue))
+                .forEach(System.out::println);
 
         // Query 2: What are all the unique cities where the traders work? List<String>
+        List<String> cityList = transactions.stream() //Stream<Transaction>
+                .map(tx -> tx.getTrader().getCity()) //Stream<String>
+                .distinct() //Stream<String>
+                .collect(Collectors.toList()); //List<String>
 
-
-
+        cityList.forEach(System.out::println);
 
         // Query 3: Find all traders from Cambridge and sort them by name. List<String>
 
