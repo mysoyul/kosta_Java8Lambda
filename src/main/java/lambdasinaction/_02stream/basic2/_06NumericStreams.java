@@ -42,8 +42,10 @@ public class _06NumericStreams {
         // numeric ranges
         IntStream evenNumbers = IntStream.rangeClosed(1, 100)
                                  .filter(n -> n % 2 == 0);
-
         System.out.println(evenNumbers.count());
+
+        IntSummaryStatistics statistics = IntStream.rangeClosed(1,100).summaryStatistics();
+        System.out.println("statistics = " + statistics);
 
         Stream<int[]> pythagoreanTriples =
                IntStream.rangeClosed(1, 100).boxed()

@@ -1,9 +1,7 @@
 package lambdasinaction._02stream.basic2;
 
-import java.util.*;
-
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PuttingIntoPractice{
     public static void main(String ...args){
@@ -27,20 +25,20 @@ public class PuttingIntoPractice{
 
 
 
-        // Query 2: What are all the unique cities where the traders work?
+        // Query 2: What are all the unique cities where the traders work? List<String>
 
 
 
 
-        // Query 3: Find all traders from Cambridge and sort them by name.
+        // Query 3: Find all traders from Cambridge and sort them by name. List<String>
 
 
 
-        // Query 4: Return a string of all traders names sorted alphabetically.
+        // Query 4: Return a string of all traders names sorted alphabetically. String
 
 
 
-        // Query 5: Are there any trader based in Milan?
+        // Query 5: Are there any trader based in Milan? boolean
 
 
 
