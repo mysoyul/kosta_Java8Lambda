@@ -37,7 +37,7 @@ public class UsingLocalDateTime {
         System.out.println(now.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 
         //Formatter 생성해서 포맷하기
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss E a", Locale.CHINA);
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss E a", Locale.KOREA);
         System.out.println(now.format(myFormatter));
 
     }
