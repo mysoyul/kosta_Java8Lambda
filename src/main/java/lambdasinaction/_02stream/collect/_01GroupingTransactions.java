@@ -3,6 +3,7 @@ package lambdasinaction._02stream.collect;
 import java.util.*;
 
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingDouble;
 
 public class _01GroupingTransactions {
 
@@ -23,6 +24,13 @@ public class _01GroupingTransactions {
         groupImperatively();
         groupFunctionally();
 
+        //각 트랜잭션을 통화별로 그룹화 한 다음에 해당 통화의 모든 트랜잭션 합계를 계산하시오
+        Map<Currency, Double> currencyDoubleMap = transactions.stream()
+                .collect(groupingBy(Transaction::getCurrency, summingDouble(Transaction::getValue)));
+        System.out.println("currencyDoubleMap = " + currencyDoubleMap);
+
+        //각 트랜잭션을 통화별로 그룹화 한 뒤 각 트랜잭션이 5000 이상일 경우를 구분하여 리스트로 반환하시오.
+
     }
 
     private static void groupImperatively() {
@@ -42,10 +50,13 @@ public class _01GroupingTransactions {
 
     //Java8 groupingBy 사용
     private static void groupFunctionally() {
+        Map<Currency, List<Transaction>> currencyListMap = transactions.stream()
+                .collect(groupingBy(Transaction::getCurrency));
+        //.collect(groupingBy(tx -> tx.getCurrency()))
 
-
-
+        System.out.println(currencyListMap);
     }
+
 
     public static class Transaction {
         private final Currency currency;
